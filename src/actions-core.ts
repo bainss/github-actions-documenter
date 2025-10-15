@@ -5,11 +5,15 @@ export interface InputProps {
   shouldSkipGenerateCustomActions: boolean
   shouldSkipGenerateReusableWorkflows: boolean
   shouldSkipGenerateAgenda: boolean
-  // overwrite: boolean
-  // output: string
-  // generateOnly?: boolean
-  // githubBaseUrl?: string
-  // shouldMakePullRequest?: boolean
+  outputFilepath: string
+  overwrite: boolean
+  makePullRequest: boolean
+  pullRequestTitle: string
+  pullRequestBody: string
+  pullRequestBaseBranch: string
+  pullRequestHeadBranchPrefix: string
+  generateOnly: boolean
+  githubBaseUrl: string
 }
 
 export const getProps = (): InputProps => ({
@@ -17,11 +21,17 @@ export const getProps = (): InputProps => ({
   shouldSkipGenerateCustomActions: core.getInput('should-skip-generate-custom-actions') === 'true',
   shouldSkipGenerateReusableWorkflows: core.getInput('should-skip-generate-reusable-workflows') === 'true',
   shouldSkipGenerateAgenda: core.getInput('should-skip-generate-agenda') === 'true',
-  // overwrite: core.getInput('overwrite') === 'true',
-  // output: core.getInput('output-filepath'),
-  // generateOnly: core.getInput('generate-only') === 'true',
-  // githubBaseUrl: core.getInput('github-base-url'),
-  // shouldMakePullRequest: core.getInput('make-pull-request') === 'true',
+  outputFilepath: core.getInput('output-filepath') || 'README.md',
+  overwrite: core.getInput('overwrite') === 'true',
+  makePullRequest: core.getInput('make-pull-request') === 'true',
+  pullRequestTitle: core.getInput('pull-request-title') || 'docs: update GitHub Actions documentation',
+  pullRequestBody:
+    core.getInput('pull-request-body') ||
+    'Auto-generated documentation update for GitHub Actions workflows and custom actions.',
+  pullRequestBaseBranch: core.getInput('pull-request-base-branch'),
+  pullRequestHeadBranchPrefix: core.getInput('pull-request-head-branch-prefix') || 'feature/github-actions-documenter',
+  generateOnly: core.getInput('generate-only') === 'true',
+  githubBaseUrl: core.getInput('github-base-url') || 'https://api.github.com',
 })
 
 export interface OutputProps {
