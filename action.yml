@@ -2,13 +2,13 @@
 # steps:
 #   - id: documenter
 #     name: "Generate document"
-#     uses: gizumon/github-actions-documenter@main
+#     uses: bainss/github-actions-documenter@feature/configurable-pull-requests
 
 # @example=### Example with parameters
 # steps:
 #   - id: documenter
 #     name: "Generate document"
-#     uses: gizumon/github-actions-documenter@main
+#     uses: bainss/github-actions-documenter@feature/configurable-pull-requests
 #     with:
 #       target-filepaths: |
 #         action.yml
